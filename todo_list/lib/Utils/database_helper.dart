@@ -13,7 +13,6 @@ class DatabaseHelper {
 	String colId = 'id';
 	String colTitle = 'title';
 	String colDescription = 'description';
-	String colPriority = 'priority';
 	String colDate = 'date';
 
 	DatabaseHelper._createInstance(); // Named constructor to create instance of DatabaseHelper
@@ -47,15 +46,15 @@ class DatabaseHelper {
 	void _createDb(Database db, int newVersion) async {
 
 		await db.execute('CREATE TABLE $todoTable($colId INTEGER PRIMARY KEY AUTOINCREMENT, $colTitle TEXT, '
-				'$colDescription TEXT, $colPriority INTEGER, $colDate TEXT)');
+				'$colDescription TEXT, $colDate TEXT)');
 	}
 
 	// Fetch Operation: Get all todo objects from database
 	Future<List<Map<String, dynamic>>> getTodoMapList() async {
 		Database db = await this.database;
 
-//		var result = await db.rawQuery('SELECT * FROM $todoTable order by $colPriority ASC');
-		var result = await db.query(todoTable, orderBy: '$colPriority ASC');
+//		var result = await db.rawQuery('SELECT * FROM $todoTable order by $colTitle ASC');
+		var result = await db.query(todoTable, orderBy: '$colTitle ASC');
 		return result;
 	}
 
@@ -68,6 +67,12 @@ class DatabaseHelper {
 
 	// Update Operation: Update a todo object and save it to database
 	Future<int> updateTodo(Todo todo) async {
+		var db = await this.database;
+		var result = await db.update(todoTable, todo.toMap(), where: '$colId = ?', whereArgs: [todo.id]);
+		return result;
+	}
+
+  	Future<int> updateTodoCompleted(Todo todo) async {
 		var db = await this.database;
 		var result = await db.update(todoTable, todo.toMap(), where: '$colId = ?', whereArgs: [todo.id]);
 		return result;

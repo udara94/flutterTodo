@@ -20,7 +20,7 @@ class TodoDetail extends StatefulWidget {
 
 class TodoDetailState extends State<TodoDetail> {
 
-	static var _priorities = ['High', 'Low'];
+	//static var _priorities = ['High', 'Low'];
 
 	DatabaseHelper helper = DatabaseHelper();
 
@@ -65,27 +65,27 @@ class TodoDetailState extends State<TodoDetail> {
 			    children: <Widget>[
 
 			    	// First element
-				    ListTile(
-					    title: DropdownButton(
-							    items: _priorities.map((String dropDownStringItem) {
-							    	return DropdownMenuItem<String> (
-									    value: dropDownStringItem,
-									    child: Text(dropDownStringItem),
-								    );
-							    }).toList(),
+				    // ListTile(
+					  //   title: DropdownButton(
+						// 	    items: _priorities.map((String dropDownStringItem) {
+						// 	    	return DropdownMenuItem<String> (
+						// 			    value: dropDownStringItem,
+						// 			    child: Text(dropDownStringItem),
+						// 		    );
+						// 	    }).toList(),
 
-							    style: textStyle,
+						// 	    style: textStyle,
 
-							    value: getPriorityAsString(todo.priority),
+						// 	    value: getPriorityAsString(todo.priority),
 
-							    onChanged: (valueSelectedByUser) {
-							    	setState(() {
-							    	  debugPrint('User selected $valueSelectedByUser');
-							    	  updatePriorityAsInt(valueSelectedByUser);
-							    	});
-							    }
-					    ),
-				    ),
+						// 	    onChanged: (valueSelectedByUser) {
+						// 	    	setState(() {
+						// 	    	  debugPrint('User selected $valueSelectedByUser');
+						// 	    	  updatePriorityAsInt(valueSelectedByUser);
+						// 	    	});
+						// 	    }
+					  //   ),
+				    // ),
 
 				    // Second Element
 				    Padding(
@@ -172,6 +172,7 @@ class TodoDetailState extends State<TodoDetail> {
 					    ),
 				    ),
 
+
 			    ],
 		    ),
 	    ),
@@ -184,30 +185,30 @@ class TodoDetailState extends State<TodoDetail> {
   }
 
 	// Convert the String priority in the form of integer before saving it to Database
-	void updatePriorityAsInt(String value) {
-		switch (value) {
-			case 'High':
-				todo.priority = 1;
-				break;
-			case 'Low':
-				todo.priority = 2;
-				break;
-		}
-	}
+	// void updatePriorityAsInt(String value) {
+	// 	switch (value) {
+	// 		case 'High':
+	// 			todo.priority = 1;
+	// 			break;
+	// 		case 'Low':
+	// 			todo.priority = 2;
+	// 			break;
+	// 	}
+	// }
 
 	// Convert int priority to String priority and display it to user in DropDown
-	String getPriorityAsString(int value) {
-		String priority;
-		switch (value) {
-			case 1:
-				priority = _priorities[0];  // 'High'
-				break;
-			case 2:
-				priority = _priorities[1];  // 'Low'
-				break;
-		}
-		return priority;
-	}
+	// String getPriorityAsString(int value) {
+	// 	String priority;
+	// 	switch (value) {
+	// 		case 1:
+	// 			priority = _priorities[0];  // 'High'
+	// 			break;
+	// 		case 2:
+	// 			priority = _priorities[1];  // 'Low'
+	// 			break;
+	// 	}
+	// 	return priority;
+	// }
 
 	// Update the title of todo object
   void updateTitle(){
@@ -239,6 +240,7 @@ class TodoDetailState extends State<TodoDetail> {
 		}
 
 	}
+
 
 	void _delete() async {
 
