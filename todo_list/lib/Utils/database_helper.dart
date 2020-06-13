@@ -1,6 +1,7 @@
 import 'package:sqflite/sqflite.dart';
 import 'dart:async';
 import 'dart:io';
+import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:todo_list/Models/todo.dart';
 
@@ -36,7 +37,7 @@ class DatabaseHelper {
 	Future<Database> initializeDatabase() async {
 		// Get the directory path for both Android and iOS to store database.
 		Directory directory = await getApplicationDocumentsDirectory();
-		String path = directory.path + 'todos.db';
+		String path = join(directory.path, "todos.db");
 
 		// Open/create the database at a given path
 		var todosDatabase = await openDatabase(path, version: 1, onCreate: _createDb);
