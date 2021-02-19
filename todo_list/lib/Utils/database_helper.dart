@@ -99,7 +99,7 @@ class DatabaseHelper {
 		var todoMapList = await getTodoMapList(); // Get 'Map List' from database
 		int count = todoMapList.length;         // Count the number of map entries in db table
 
-		List<Todo> todoList = List<Todo>();
+		List<Todo> todoList = <Todo>[];
 		// For loop to create a 'todo List' from a 'Map List'
 		for (int i = 0; i < count; i++) {
 			todoList.add(Todo.fromMapObject(todoMapList[i]));
